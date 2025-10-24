@@ -1,2 +1,74 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `rust_patterns` crate."><title>rust_patterns - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-aa0817cf.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="rust_patterns" data-themes="" data-resource-suffix="" data-rustdoc-version="1.90.0 (1159e78c4 2025-09-14)" data-channel="1.90.0" data-search-js="search-fa3e91e5.js" data-settings-js="settings-5514c975.js" ><script src="../static.files/storage-68b7e25d.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-eebb9057.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-32bb7600.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../rust_patterns/index.html">rust_<wbr>patterns</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#macros" title="Macros">Macros</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>rust_patterns</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/rust_patterns/lib.rs.html#1-4">Source</a> </span></div><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="encapsulation/index.html" title="mod rust_patterns::encapsulation">encapsulation</a><span title="Restricted Visibility">&nbsp;🔒</span> </dt><dt><a class="mod" href="hashing/index.html" title="mod rust_patterns::hashing">hashing</a></dt><dd>Hiding the Backing Implementation of Algorithms and Data Structures</dd><dt><a class="mod" href="plugins/index.html" title="mod rust_patterns::plugins">plugins</a></dt><dd>Plugin Systems in Rust</dd><dt><a class="mod" href="type_erased_api/index.html" title="mod rust_patterns::type_erased_api">type_<wbr>erased_<wbr>api</a></dt><dd>Typed and Type-Erased API</dd></dl><h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2><dl class="item-table"><dt><a class="macro" href="macro.registered_item_impl.html" title="macro rust_patterns::registered_item_impl">registered_<wbr>item_<wbr>impl</a></dt><dd>This macro ensures correct implementation of the <code>RegisteredItem</code> trait. The tricky bit is the implementation of
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Rust Programming Patterns"><title>rust_patterns - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-aa0817cf.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="rust_patterns" data-themes="" data-resource-suffix="" data-rustdoc-version="1.90.0 (1159e78c4 2025-09-14)" data-channel="1.90.0" data-search-js="search-fa3e91e5.js" data-settings-js="settings-5514c975.js" ><script src="../static.files/storage-68b7e25d.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-eebb9057.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-32bb7600.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../rust_patterns/index.html">rust_<wbr>patterns</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#rust-programming-patterns" title="Rust Programming Patterns">Rust Programming Patterns</a><ul><li><a href="#how-to-read" title="How to Read">How to Read</a></li><li><a href="#authorship-attribution-and-license" title="Authorship, Attribution, and License">Authorship, Attribution, and License</a></li></ul></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#macros" title="Macros">Macros</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>rust_patterns</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/rust_patterns/lib.rs.html#1-6">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="rust-programming-patterns"><a class="doc-anchor" href="#rust-programming-patterns">§</a>Rust Programming Patterns</h2>
+<p>This repository is a curated and growing collection of Rust programming
+patterns, idioms, and implementation techniques drawn from real-world systems
+programming, language design, and library development. I might also include
+opinionated best practices.</p>
+<p>Many of these examples were developed or collected during work on
+<a href="https://github.com/CDCgov/ixa">ixa</a> — an agent-based modeling framework that
+makes heavy use of reflection and plugin-like systems, which explains the bias
+towards those themes here. Some ideas come from my work on
+<a href="https://github.com/rljacobson/mod2">mod2</a>, a Rust implementation of some of the
+advanced pattern matching algorithms in Maude.</p>
+<p>Some of the ideas represented here are idiomatic Rust rediscoveries of much
+older techniques from systems programming, functional programming, and type
+theory (for example, patterns inspired by Haskell’s type-level design or
+ML-style module systems). While these patterns are well-known across programming
+language communities, their practical and idiomatic realization in Rust is of
+particular interest here.</p>
+<p><strong>Goals:</strong></p>
+<ul>
+<li>
+<p>illustration of ideas, not (necessarily) production quality implementation —
+adapt to your use case or use an existing crate</p>
+</li>
+<li>
+<p>zero-cost abstractions</p>
+</li>
+<li>
+<p>general applicability</p>
+</li>
+<li>
+<p>Rust-specific context</p>
+</li>
+</ul>
+<p><strong>Major Themes</strong>:</p>
+<ul>
+<li>Type-indexed data and reflection</li>
+<li>Registries and plugin systems</li>
+<li>Hashing and map design</li>
+<li>Type-erased vs. strongly typed APIs</li>
+<li>Strategies for initialization / separation of mutable and immutable accesses.</li>
+<li>Memory ownership and life cycle management</li>
+</ul>
+<p><strong>Similar Efforts:</strong></p>
+<p>Anyone interested in this repo will almost certainly want to study
+<a href="https://rust-unofficial.github.io/patterns/">Rust Design Patterns (rust-unofficial)</a>,
+a documented catalogue of idiomatic Rust patterns, anti-patterns, and community
+conventions. Includes behavioural, structural, and creational patterns.</p>
+<h3 id="how-to-read"><a class="doc-anchor" href="#how-to-read">§</a>How to Read</h3>
+<p>The idea is to read the docs like a book. The docs are rendered on GitHub Pages:
+<a href="https://www.robertjacobson.dev/rust_patterns/rust_patterns/">https://www.robertjacobson.dev/rust_patterns/rust_patterns/</a></p>
+<p>Commentary is provided in doc comments and in the source code itself. Sometimes
+there isn’t a doc comment that is a good fit for something I have to say, so
+I’ll but information in a module-level doc comment. There isn’t a perfect
+solution. Hopefully it’s still useful.</p>
+<h3 id="authorship-attribution-and-license"><a class="doc-anchor" href="#authorship-attribution-and-license">§</a>Authorship, Attribution, and License</h3>
+<p>Copyright © 2025 Robert Jacobson. This software is distributed under the terms
+of the <a href="LICENSE-MIT">MIT license</a> or the <a href="LICENSE-APACHE">Apache 2.0 license</a> at
+your preference.</p>
+<p>This collection represents a blend of:</p>
+<ul>
+<li>techniques independently developed or refined during work on Rust projects
+such as <a href="https://github.com/CDCgov/ixa">ixa</a>.</li>
+<li>patterns that are well-established in the wider systems, functional, and
+language-theory communities.</li>
+<li>idiomatic Rust implementations of known ideas — often inspired by patterns
+that have evolved organically within the Rust community itself.</li>
+</ul>
+<p>Although the implementations and commentary here are original (to the extent
+that even means anything, as some are also <em>trivial</em>), the underlying ideas are
+shared heritage within decades of programming language development. This
+repository is intended in that spirit — as a documentation of understanding,
+adaptation, and synthesis, rather than as a claim of invention.</p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="encapsulation/index.html" title="mod rust_patterns::encapsulation">encapsulation</a></dt><dd>Fine-grained Encapsulation and Information Hiding with Traits</dd><dt><a class="mod" href="hashing/index.html" title="mod rust_patterns::hashing">hashing</a></dt><dd>Hiding the Backing Implementation of Algorithms and Data Structures</dd><dt><a class="mod" href="plugins/index.html" title="mod rust_patterns::plugins">plugins</a></dt><dd>Plugin Systems in Rust</dd><dt><a class="mod" href="type_erased_api/index.html" title="mod rust_patterns::type_erased_api">type_<wbr>erased_<wbr>api</a></dt><dd>Typed and Type-Erased API</dd></dl><h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2><dl class="item-table"><dt><a class="macro" href="macro.registered_item_impl.html" title="macro rust_patterns::registered_item_impl">registered_<wbr>item_<wbr>impl</a></dt><dd>This macro ensures correct implementation of the <code>RegisteredItem</code> trait. The tricky bit is the implementation of
 <code>RegisteredItem::index</code>.</dd></dl></section></div></main></body></html>
