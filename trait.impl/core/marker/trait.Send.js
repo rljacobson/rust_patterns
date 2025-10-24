@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["rust_patterns",[["impl !<a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a> for <a class=\"struct\" href=\"rust_patterns/plugins/item_registry/struct.RegisteredItems.html\" title=\"struct rust_patterns::plugins::item_registry::RegisteredItems\">RegisteredItems</a>",1,["rust_patterns::plugins::item_registry::RegisteredItems"]],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a> for <a class=\"struct\" href=\"rust_patterns/hashing/struct.Xxh3Hasher128.html\" title=\"struct rust_patterns::hashing::Xxh3Hasher128\">Xxh3Hasher128</a>",1,["rust_patterns::hashing::Xxh3Hasher128"]],["impl&lt;T&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a> for <a class=\"struct\" href=\"rust_patterns/type_erased_api/struct.Index.html\" title=\"struct rust_patterns::type_erased_api::Index\">Index</a>&lt;T&gt;<div class=\"where\">where\n    T: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a>,</div>",1,["rust_patterns::type_erased_api::Index"]]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[1276]}

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["Index"],"trait":["TypeErasedIndex"],"type":["BxIndex","EntityId","HashValue"]};

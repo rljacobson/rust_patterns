@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["add_to_registry","get_data_plugin_count","initialize_item_index"],"static":["NEXT_ITEM_INDEX","REGISTERED_ITEMS"],"struct":["RegisteredItems"],"trait":["RegisteredItem"],"type":["BxRegisteredItem"]};

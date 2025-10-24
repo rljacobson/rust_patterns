@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Plugin Systems in Rust"><title>rust_patterns::plugins - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-aa0817cf.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="rust_patterns" data-themes="" data-resource-suffix="" data-rustdoc-version="1.90.0 (1159e78c4 2025-09-14)" data-channel="1.90.0" data-search-js="search-fa3e91e5.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-68b7e25d.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-eebb9057.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-32bb7600.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../rust_patterns/index.html">rust_<wbr>patterns</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module plugins</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#plugin-systems-in-rust" title="Plugin Systems in Rust">Plugin Systems in Rust</a><ul><li><a href="#1-run-before-main-mechanisms" title="1. “Run Before Main” Mechanisms">1. “Run Before Main” Mechanisms</a></li><li><a href="#2-linker-based-distributed-slice-mechanisms" title="2. Linker-based “Distributed Slice” Mechanisms">2. Linker-based “Distributed Slice” Mechanisms</a></li><li><a href="#3-hybrid-approaches" title="3. Hybrid Approaches">3. Hybrid Approaches</a></li></ul></li></ul><h3><a href="#modules">Module Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate rust_<wbr>patterns</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">rust_patterns</a></div><h1>Module <span>plugins</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/rust_patterns/plugins/mod.rs.html#1-90">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="plugin-systems-in-rust"><a class="doc-anchor" href="#plugin-systems-in-rust">§</a>Plugin Systems in Rust</h2>
+<p>Writing a plugin system in Rust usually involves two main components:</p>
+<ol>
+<li>A mechanism for providing a type-erased interface between the main program and the plugin.</li>
+<li>A mechanism for plugin discovery, which you might call “initialization”
+or “registration”, but which is more about knowing which plugins exist,
+possibly across crate boundaries, without explicit central declaration.</li>
+</ol>
+<p>The first is well-trodden ground in Rust. You typically use a trait object to provide
+a type-erased interface. (See <a href="../type_erased_api/index.html" title="mod rust_patterns::type_erased_api">crate::type_erased_api</a>.)</p>
+<p>For the second, the tricky part is avoiding having to know beforehand what plugins exist
+and what their dependencies are. The phrase “plugin” as we are using it here implies some
+degree of automatic discovery of these things. (Otherwise, they’re just libraries or modules
+or, if you want to be maximally generic, <em>dependencies</em>.) We are especially interested
+the situation where you have a library that can use plugins defined in external crates.</p>
+<p>While some kind of automatic initialization is implied, note that the plugin problem itself is a
+separate problem from that of initialization (lazy or otherwise), which <code>OnceCell</code>, <code>LazyStatic</code>,
+and other mechanisms address. The issue is <em>not</em> that initialization needs to occur at all, but
+rather that we need to know which items exist in the first place. Once we know which items exist,
+our strategy for initialization, while interesting in its own right, is a separate question.</p>
+<p>There are two main ways to do plugins in Rust, plus hybrid approaches.</p>
+<h5 id="1-run-before-main-mechanisms"><a class="doc-anchor" href="#1-run-before-main-mechanisms">§</a>1. “Run Before Main” Mechanisms</h5>
+<p>These systems rely on functions that are automatically executed <em>before</em>
+<code>main()</code> begins. They typically use compiler or linker attributes (<code>#[ctor]</code>,
+<code>#[dtor]</code>, or <code>#[used]</code>) to mark static constructors that run at startup.</p>
+<p>Example crates: <a href="https://crates.io/crates/ctor">ctor</a>, <a href="https://crates.io/crates/init">init</a></p>
+<p>This mechanism is easy to understand and enjoys wide platform
+support, because it’s the same mechanism used by C/C++ construction of
+statics, but it has severe limitations, including but not limited to:</p>
+<ul>
+<li>unspecified execution order</li>
+<li><a href="https://github.com/rust-lang/rust/issues/28794#issuecomment-368693049">fragility in dynamic linking contexts</a>
+(cdylib, plugins, embedded targets).</li>
+<li><a href="https://github.com/mmastrac/rust-ctor#warnings">fragility in static linking contexts</a> (“some linker configurations
+may cause <code>#[ctor]</code> and <code>#[dtor]</code> functions to be stripped from the final binary”)</li>
+<li>execution of code prior to program initialization (e.g. using <code>println!</code> causes a panic)</li>
+</ul>
+<h5 id="2-linker-based-distributed-slice-mechanisms"><a class="doc-anchor" href="#2-linker-based-distributed-slice-mechanisms">§</a>2. Linker-based “Distributed Slice” Mechanisms</h5>
+<p>This category uses linker section merging to collect specially annotated static
+data items (not code) across crates into a single contiguous slice. (The static
+data could be function pointers or static structs with their own methods.)</p>
+<p>Example crates: <a href="https://crates.io/crates/linkme">linkme</a>,
+<a href="https://crates.io/crates/distributed_slice">distributed_slice</a>.</p>
+<p>This mechanism is true automatic cross-crate registration with <em>zero runtime overhead</em>, because
+it is literally just static data globally accessible by name. As with the <code>ctor</code> solution,
+order is not specified, which in practice just means that the question of initialization
+order is moved to user land at runtime, arguably where it belongs. Unfortunately, this
+mechanism (currently) relies on specific linker behavior and is not compatible with certain
+build environments and runtime targets. Crucially, <em>there is currently no support for Wasm.</em></p>
+<h5 id="3-hybrid-approaches"><a class="doc-anchor" href="#3-hybrid-approaches">§</a>3. Hybrid Approaches</h5>
+<p>These approaches add layers of convenience, for example, ways to do lazy initialization and thread safety.</p>
+<ul>
+<li><a href="https://crates.io/crates/inventory">inventory</a> — layers initialization on
+top of the “distributed slice” concept for situations where initialization
+requires runtime code execution, not just compile-time statics.</li>
+<li><a href="https://crates.io/crates/static_init">static_init</a> — adds sophisticated initialization
+mechanisms that claim to be superior to <code>lazy_static</code> and other alternatives for certain use cases.</li>
+</ul>
+<hr />
+<p>The general consensus is that the “distributed slice” mechanism is the best
+way forward for the Rust ecosystem, but compiler support is ultimately
+required. The lack of Wasm support is a nonstarter for many applications.</p>
+<p>The reason the “distributed slice” mechanism is the “right” thing to do boils down to Rust’s
+fundamental assumption that nothing executes before or after <code>main()</code>. Violating that runtime
+assumption will be fragile at best <em>in any conceivable future</em>. On the flip side, “run
+before main” has widespread platform support inherited from C++, so the “worse” solution is
+currently the best solution right now—indeed, the only solution if Wasm support is required.</p>
+<p>It’s not ideal. Everybody knows this. It’s just a hard nut to crack.</p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="item_registry/index.html" title="mod rust_patterns::plugins::item_registry">item_<wbr>registry</a></dt><dd>The “Registry Pattern”</dd></dl></section></div></main></body></html>
