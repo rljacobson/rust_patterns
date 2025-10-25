@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["impl_side_constraints","sealed_traits"]};
