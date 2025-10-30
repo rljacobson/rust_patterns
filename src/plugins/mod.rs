@@ -71,6 +71,19 @@ These approaches add layers of convenience, for example, ways to do lazy initial
 - [static_init](https://crates.io/crates/static_init) — adds sophisticated initialization
   mechanisms that claim to be superior to `lazy_static` and other alternatives for certain use cases.
 
+## A Not-Quite Plugin System
+
+We are requiring an "automatic discovery" mechanism for plugins in which we have access to every plugin (or plugin type)
+at runtime, even if it is defined in an external crate. But suppose we weaken this requirement to the following:
+
+> We want to be able to discover new plugins lazily as they are accessed.
+
+This is a very different proposition because it explicitly abandons the requirement that we
+know all the types up front. It's enough to discover the types as they are accessed, and
+if an item is never accessed at all, it isn't even initialized. The very act of accessing
+the type, presumably through a function with a generic parameter, tells us it exists.
+The [`crate::item_registry`] module demonstrates a system that can be used in this way.
+
 ---
 
 The general consensus is that the "distributed slice" mechanism is the best

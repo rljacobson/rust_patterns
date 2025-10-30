@@ -1,9 +1,9 @@
 # Rust Programming Patterns
 
-This repository is a curated and growing collection of Rust programming
-patterns, idioms, and implementation techniques drawn from real-world systems
-programming, language design, and library development. I might also include
-opinionated best practices.
+This repository is a curated and growing collection of Rust programming patterns, idioms, and
+implementation techniques drawn from real-world systems programming, language design, and
+library development. I might also include opinionated best practices. See [TODO.md](TODO.md)
+for topics about which I have something to say that hasn't made it into this repo yet.
 
 Many of these examples were developed or collected during work on
 [ixa](https://github.com/CDCgov/ixa) — an agent-based modeling framework that
@@ -42,7 +42,7 @@ particular interest here.
 Anyone interested in this repo will almost certainly want to study
 [Rust Design Patterns (rust-unofficial)](https://rust-unofficial.github.io/patterns/),
 a documented catalogue of idiomatic Rust patterns, anti-patterns, and community
-conventions. Includes behavioural, structural, and creational patterns.
+conventions. Includes behavioral, structural, and creational patterns.
 
 ## How to Read
 

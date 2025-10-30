@@ -5,11 +5,11 @@
 Rust supports shared interfaces via traits. However, Rust's support for
 shared _implementation_ is very limited.
 
-A trait can have a default implementation for a method, but this support for
-shared implementation is hamstrung by the fact that traits cannot have data members
-of any visibility. Thus, any default implementation can only assume about `self`
-what the trait itself asserts and cannot access any data directly. What's more, as
-a mechanism for defining public interfaces, trait methods are necessarily public.
+A trait can have a default implementation for a method, but this support for shared
+implementation is hamstrung by the fact that traits cannot have data members of any
+visibility. Thus, any default implementation can only assume about `self` what the trait
+itself asserts and cannot access any data directly. What's more, because they are intended
+as a mechanism for defining public interfaces, trait methods are necessarily public.
 
 Generics have similar limitations: they can assume very little about the type parameters,
 and they cannot access data members of any visibility. Their advantage is that they are
@@ -48,5 +48,5 @@ not correspond directly to the Rust language feature of the same name.
 
 */
 
-pub mod sealed_traits;
 pub mod impl_side_constraints;
+pub mod sealed_traits;
