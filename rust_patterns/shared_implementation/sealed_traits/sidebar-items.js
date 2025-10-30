@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {};
+window.SIDEBAR_ITEMS = {"mod":["all_callable_some_overridable","no_restrictions"],"struct":["Person"]};
