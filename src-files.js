@@ -1,2 +1,2 @@
-createSrcSidebar('[["rust_patterns",["",[["plugins",[],["item_registry.rs","mod.rs"]],["shared_implementation",[],["impl_side_constraints.rs","mod.rs","sealed_traits.rs"]]],["hashing.rs","lib.rs","type_erased_api.rs"]]]]');
-//{"start":19,"fragment_lengths":[200]}
+createSrcSidebar('[["rust_patterns",["",[["data_structures",[],["mod.rs","value_vector.rs"]],["plugins",[],["item_registry.rs","mod.rs"]],["shared_implementation",[],["impl_side_constraints.rs","mod.rs","sealed_traits.rs"]]],["hashing.rs","lib.rs","type_erased_api.rs"]]]]');
+//{"start":19,"fragment_lengths":[252]}

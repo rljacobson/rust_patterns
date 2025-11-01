@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"macro":["registered_item_impl"],"mod":["hashing","plugins","shared_implementation","type_erased_api"]};
+window.SIDEBAR_ITEMS = {"macro":["registered_item_impl"],"mod":["data_structures","hashing","plugins","shared_implementation","type_erased_api"]};
