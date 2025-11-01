@@ -39,6 +39,7 @@ pub mod hashing;
 pub mod plugins;
 pub mod shared_implementation;
 pub mod type_erased_api;
+pub mod data_structures;
 
 // Re-exported for use in exported macros
 pub use ctor;

@@ -30,3 +30,9 @@ I have to say might have already been said elsewhere a lot better, in which case
   - Need to erase the _unrepresentable_ type of the iterator constructed using iterator combinators.
   - How `fn make_thing() -> impl Trait` works but is very fragile.
 - tuples: anything worth saying about lessons learned from multi-properties?
+
+
+# Other
+
+Another collection of notes: https://qouteall.fun/qouteall-blog/2025/How%20to%20Avoid%20Fighting%20Rust%20Borrow%20Checker
+Discussion: https://lobste.rs/s/cnhjj2/how_avoid_fighting_rust_borrow_checker
