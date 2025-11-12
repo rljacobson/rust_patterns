@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["simple_static_vtable","static_reference_to_zst"],"struct":["MyStaticData"],"trait":["MyTrait"]};

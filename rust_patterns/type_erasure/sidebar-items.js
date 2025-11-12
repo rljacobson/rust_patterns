@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["static_interface","type_erased_api"]};

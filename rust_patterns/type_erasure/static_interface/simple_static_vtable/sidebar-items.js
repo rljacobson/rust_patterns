@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["tag_for"],"struct":["StaticMyTraitInterface","VTableHolder"],"type":["Tag"]};
