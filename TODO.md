@@ -30,6 +30,36 @@ I have to say might have already been said elsewhere a lot better, in which case
   - Need to erase the _unrepresentable_ type of the iterator constructed using iterator combinators.
   - How `fn make_thing() -> impl Trait` works but is very fragile.
 - tuples: anything worth saying about lessons learned from multi-properties?
+- A ZST-based interface to the static methods/data of a non-ZST type:
+
+```rust
+struct TypedTag<M: MyTrait>(PhantomData<M>);
+trait TypeErasedTag {
+  fn get_static_dependency_data() -> &'static MyStaticData;
+}
+impl<M: MyTrait> TypeErasedTag for TypedTag<M> {
+  fn get_static_dependency_data() -> &'static MyStaticData {
+    M::get_static_dependency_data()
+  }
+}
+
+struct TypeErasedTag(Box<dyn TypeErasedTag>);
+
+impl TypeErasedTag {
+  fn get_static_dependency_data() -> &'static MyStaticData {
+    
+  }
+}
+```
+
+
+## Type-level programming
+
+Not just intellectual expercises, but things I have actually used in real-life
+
+- GADTs in Rust
+- `EqualTypes<A, B>`, which can only be created if `A=B` (called `struct Is<A, B>` [in this article](https://blog.csongor.co.uk/gadts-in-rust/))
+- `Has<FieldMarker>`
 
 
 # Other

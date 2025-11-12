@@ -160,7 +160,8 @@ pub trait RegisteredItem: Any + Default {
     /// Creates a new instance of the item.
     fn new_boxed() -> Box<Self>
     where
-        Self: Sized {
+        Self: Sized,
+    {
         Box::new(Default::default())
     }
 }
@@ -276,14 +277,12 @@ pub fn initialize_item_index(plugin_index: &AtomicUsize) -> usize {
     // to put it mildly.)
 }
 
-
 /// A wrapper around a vector of [`RegisteredItem`]s.
 pub struct RegisteredItems {
     items: Vec<OnceCell<Box<dyn Any>>>,
 }
 
 impl RegisteredItems {
-
     /// Creates a new [`RegisteredItems`] instance, allocating the exact number
     /// of slots as there are types that implement [`RegisteredItem`]s.
     ///
@@ -391,12 +390,14 @@ macro_rules! registered_item_impl {
     };
 }
 
-
 #[cfg(test)]
 mod tests {
+    use std::{
+        sync::{Arc, Barrier},
+        thread,
+    };
+
     use super::*;
-    use std::sync::{Arc, Barrier};
-    use std::thread;
 
     // Test item types
     #[derive(Debug, Clone, PartialEq)]
@@ -437,7 +438,6 @@ mod tests {
     registered_item_impl!(TestItem1);
     registered_item_impl!(TestItem2);
     registered_item_impl!(TestItem3);
-
 
     // Test the internal synchronization mechanisms of `initialize_item_index()`.
     //
@@ -483,7 +483,6 @@ mod tests {
         // And that index should be what was originally the next available index
         assert_eq!(first, initial_registered_items_count);
 
-
         // Test 2: Try to initialize multiple indices from multiple threads simultaneously.
         //
         // Creates 5 different entities (each with their own atomic). Initializes
@@ -504,9 +503,7 @@ mod tests {
         // Initialize each entity from a different thread
         for entity in entities.iter() {
             let entity_clone = Arc::clone(entity);
-            let handle = thread::spawn(move || {
-                initialize_item_index(&entity_clone)
-            });
+            let handle = thread::spawn(move || initialize_item_index(&entity_clone));
             handles.push(handle);
         }
 
@@ -519,7 +516,13 @@ mod tests {
         // Each entity should get a unique, sequential index starting with `initial_registered_items_count`.
         results.sort();
         for (i, &result) in results.iter().enumerate() {
-            assert_eq!(result, i + initial_registered_items_count, "Entity should have index {}, got {}", i, result);
+            assert_eq!(
+                result,
+                i + initial_registered_items_count,
+                "Entity should have index {}, got {}",
+                i,
+                result
+            );
         }
 
         // Test 3: Try to initialize multiple entities from multiple threads multiple times.
@@ -548,9 +551,7 @@ mod tests {
         }
 
         // Collect all results
-        let results: Vec<_> = handles.into_iter()
-                                     .map(|h| h.join().unwrap())
-                                     .collect();
+        let results: Vec<_> = handles.into_iter().map(|h| h.join().unwrap()).collect();
 
         // Count occurrences of each index
         let mut counts = std::collections::HashMap::new();
@@ -571,7 +572,10 @@ mod tests {
         }
 
         // Global counter should be 3
-        assert_eq!(get_registered_item_count() - initial_registered_items_count, 3);
+        assert_eq!(
+            get_registered_item_count() - initial_registered_items_count,
+            3
+        );
 
         // Each entity should have one of the indices
         let indices: Vec<_> = vec![
@@ -587,12 +591,9 @@ mod tests {
         let expected_indices = vec![
             0 + initial_registered_items_count,
             1 + initial_registered_items_count,
-            2 + initial_registered_items_count
+            2 + initial_registered_items_count,
         ];
-        assert_eq!(sorted_indices,
-                   expected_indices
-        );
-
+        assert_eq!(sorted_indices, expected_indices);
     }
 
     // Registering items is idempotent
@@ -733,11 +734,17 @@ mod tests {
 
         // Intentionally implement `RegisteredItem` incorrectly.
         impl RegisteredItem for UnregisteredEntity {
-            fn name() -> &'static str where Self: Sized {
+            fn name() -> &'static str
+            where
+                Self: Sized,
+            {
                 "UnregisteredItem"
             }
 
-            fn index() -> usize where Self: Sized {
+            fn index() -> usize
+            where
+                Self: Sized,
+            {
                 87000 // An invalid index
             }
 

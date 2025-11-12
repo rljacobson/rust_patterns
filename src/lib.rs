@@ -35,11 +35,11 @@ the macro generates is obviously only correct if the macro itself is correct.
 
 */
 
+pub mod data_structures;
 pub mod hashing;
 pub mod plugins;
 pub mod shared_implementation;
-pub mod type_erased_api;
-pub mod data_structures;
+pub mod type_erasure;
 
 // Re-exported for use in exported macros
 pub use ctor;
