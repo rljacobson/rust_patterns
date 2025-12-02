@@ -46,6 +46,41 @@ There are a few ways to deal with this requirement:
   machine-checked correctness in favor of a human-checked contract, which may be unpalatable or even
   prohibited in some settings, but which is probably good enough for the vast majority of use cases.
 
+
+# Options for `!Drop`
+
+A simple way to ensure soundness of `ValueVec<T>` is to require `T` to be `Copy`. But there are alternatives.
+
+### `std::mem::ManuallyDrop<T>`
+
+> A wrapper to inhibit the compiler from automatically calling T’s destructor. This wrapper is 0-cost.
+
+
+### Compiler error on `std::mem::needs_drop::<V>()`
+
+We can prevent construction of `ValueVec`s for values with destructors by using the `needs_drop` function:
+
+```rust
+impl<V> ValueVec<V> {
+    pub fn new() -> Self {
+        // Panics if `V` has a destructor.
+        assert!(!needs_drop::<V>(), "Type must not have a destructor");
+
+        ValueVec {
+            values: Vec::new(),
+        }
+    }
+}
+```
+
+## Homework assignments
+
+- Can we further constrain `V` to be `!Drop` (and/or `!Clone`) ?
+- Where is the compiler inserting `Drop`? Can we only implement mutating primitives such that
+  `Drop` is not called? (If we never "delete" something. Is `Drop` called when overwritten?)
+- If we provide a trivial implementation of `Drop` for all `Property` types, does that solve
+  the problem? (Could there be a hidden `Drop` impl called somehow by virtue of what the type is?)
+
 */
 
 use std::{cell::UnsafeCell, fmt::Debug};

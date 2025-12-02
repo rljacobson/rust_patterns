@@ -31,7 +31,7 @@ done
 
 [tasks.docs]
 description = "Build the API docs"
-run = "cargo doc --all-features --no-deps --"
+run = "cargo doc --all-features --document-private-items --no-deps --"
 
 [tasks.test]
 description = "Run all tests"

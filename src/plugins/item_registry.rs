@@ -123,7 +123,7 @@ All registered items that participate in the same registry pattern implementatio
 We can imagine two different approaches to how many implementations of the registry pattern are in a given project:
 
 1. A single implementation of the registry pattern could conceivably be generic over every category of *thing* that can be registered, or at least every category that matches all of your choices for you have made in all of the dimensions listed in the previous section.
-   - Unifies the storage and access for `Widget`s, `Gadget`s, `Blogets`, `Sprockets`, ..., potentially lots of disparate categories of objects.
+   - Unifies the storage and access for `Widget`s, `Gadget`s, `Blodgets`, `Sprockets`, ..., potentially lots of disparate categories of objects.
 
    - Minimizes lines of code, API
 2. You have separate implementations in your project of the registry pattern for each category even if the design choices in all dimensions of the previous section are the same. For example, you might implement the registry pattern for your `Widget` system and then have a separate independent implementation of the registry pattern for your `Gadget` system.
